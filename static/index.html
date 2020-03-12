@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Calculator</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="katex/katex.css">
+  <style>
+hr {
+  height: 3px;
+}
+.layui-card-body{
+  font-size: large;
+}
+.layui-card-body p{
+  text-align: center;
+}
+blockquote h1{
+  font-size:x-large;
+}
+  </style>
+</head>
+<body>
+<ul class="layui-nav">
+  <li class="layui-nav-item layui-this"><a href="/">首页</a></li>
+  <!-- <li class="layui-nav-item"><a href="#">介绍</a></li>
+  <li class="layui-nav-item"><a id="setting-btn">设置</a></li> -->
+  <li class="layui-nav-item"><a target="_blank" href="help.html">帮助</a></li>
+  <li class="layui-nav-item"><a target="_blank" href="https://github.com/sun-zhenxing/">作者</a></li>
+</ul>
+
+<fieldset class="layui-elem-field">
+  <blockquote class="layui-elem-quote layui-quote-nm">
+    <h1>VisualMath</h1>
+    <div style="padding: 20px; background-color: #F2F2F2;">
+      <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+          <div class="layui-card">
+            <!-- <div class="layui-card-header"></div> -->
+            <div class="layui-card-body">
+              <h3>什么是Visual Math？</h3>
+              <hr class="layui-bg-blue">
+              <p>强大的数学计算引擎</p>
+              <hr class="layui-bg-blue">
+              <p>你可以在这里解方程、化简表达式、积分或者做任何你想做的事情</p>
+              <hr class="layui-bg-blue">
+              <p>一切的事情都会异常简单，只要你决定开始</p>
+              <hr class="layui-bg-blue">
+              <p>这里永远有值得你学习的东西，她不仅仅是一个工具</p>
+              <hr class="layui-bg-blue">
+              <p class="layui-anim" data-anim="layui-anim-up" style="text-align: center;"><a href="math.html"><button class="layui-btn layui-btn-normal layui-btn-radius" type="button">开始</button></a></p>
+            </div>
+          </div>
+        </div>
+        <div class="layui-col-md12">
+          <div class="layui-card">
+            <!-- <div class="layui-card-header"></div> -->
+            <div class="layui-card-body">
+              <h3>她能帮你做什么？</h3>
+              <hr class="layui-bg-blue">
+              <div data-anim="layui-anim-up" class="layui-anim loopingDiv layui-field-box"><p id="katex-show-1" class="latex-box" data-latex="\displaystyle F(x) = \sqrt{\frac{2}{\pi}} \int_{0}^\infty \sin(x) \mathrm{d} x"></p><p>计算神器</p></div>
+              <hr class="layui-bg-blue">
+              <div data-anim="layui-anim-up" class="layui-anim loopingDiv layui-field-box"><p id="katex-show-2" class="latex-box" data-latex="\displaystyle \sqrt[3]{\frac{27 b}{2} + \frac{\sqrt{108 a^{3} + 729 b^{2}}}{2}}"></p><p>支持化简</p></div>
+              <hr class="layui-bg-blue">
+              <div data-anim="layui-anim-up" class="layui-anim loopingDiv layui-field-box"><p id="katex-show-3" class="latex-box" data-latex="\displaystyle \frac{\partial^{2}}{\partial x^{2}} u{\left(t,x \right)} = 0"></p><p>微积分支持</p></div>
+              <hr class="layui-bg-blue">
+              <div data-anim="layui-anim-up" class="layui-anim loopingDiv layui-field-box"><p id="katex-show-4" class="latex-box" data-latex="\displaystyle \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)"></p><p>符号命令</p></div>
+              <hr class="layui-bg-blue">
+              <div data-anim="layui-anim-up" class="layui-anim loopingDiv layui-field-box"><p id="katex-show-5" class="latex-box" data-latex="\displaystyle \Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}"></p><p>伪代码在线运行</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="layui-field-box">
+      <blockquote class="layui-elem-quote">
+        <legend><a nmae="mod-t-t">核心技术</a></legend>
+        <table class="layui-table" lay-skin="row" lay-even="">
+          <colgroup>
+            <col width="50">
+            <col>
+          </colgroup>
+          <tbody>
+            <tr>
+              <td><img src="images/sympylogo.png" /></td>
+              <td>SymPy是符号数学的Python库。它的目标是成为一个功能齐全的计算机代数系统（CAS），同时保持代码尽可能简单，以便易于理解和易于扩展。SymPy完全用Python编写。</td>
+            </tr>
+            <tr>
+              <td><img src="images/katexlogo.png" /></td>
+              <td>最快的网络数学排版库。KaTex的布局基于Donald Knuth的TeX，这是数学排版的黄金标准。</td>
+            </tr>
+            <tr>
+              <td><img src="images/flasklogo.png" /></td>
+              <td>Flask是一个使用 Python 编写的轻量级 Web 应用框架。</td>
+            </tr>
+            <tr>
+              <td><img src="images/layerlogo.png" /></td>
+              <td>layer是一款web弹层组件，致力于服务各个水平段的开发人员。layer侧重于用户灵活的自定义，为不同人的使用习惯提供动力。</td>
+            </tr>
+            <tr>
+              <td><img src="images/jquerylogo.png" /></td>
+              <td>jQuery是一个快速、小且功能丰富的JavaScript库。它使HTML文档的遍历和操作、事件处理、动画和Ajax等操作变得更加简单，它使用了一个易于使用的API，可以跨多种浏览器工作。</td>
+            </tr>
+          </tbody>
+        </table> 
+      </blockquote>
+    </div>
+  </blockquote>
+</fieldset>
+<script src="layui/layui.js" charset="utf-8"></script>
+<script src="katex/katex.js"></script>
+<script src="js/jquery.min.js"></script>
+<script>
+layui.use('layer','element', function(){
+  var element = layui.element,layer = layui.layer;
+  element.on('nav(demo)', function(elem){
+    //console.log(elem)
+    layer.msg(elem.text());
+  });
+});
+
+layui.use('carousel', function(){
+  var carousel = layui.carousel;
+  //建造实例
+  carousel.render({
+    elem: '#looping-box'
+    ,width: '100%' //设置容器宽度
+    ,arrow: 'always' //始终显示箭头
+    //,anim: 'fade' //切换动画方式
+  });
+});
+
+$(document).ready(function(){
+  $latex = $(".latex-box");
+  for(i=0; i < $latex.length; i++){
+    katex.render($latex.eq(i).attr("data-latex"), $latex[i], { displayMode:true, throwOnError: false });
+  }
+  $("button.layui-btn").click(function(){
+    layer.msg("正在加载中……")
+  });
+});
+</script>
+</body>
+</html>
+
+

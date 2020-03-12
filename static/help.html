@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Calculator 帮助文档</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="katex/katex.css">
+</head>
+<body>
+
+
+<div style="padding: 20px; background-color: #F2F2F2;">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">帮助文档正在建造…………</div>
+        <div class="layui-card-body">
+          <br>许多功能还没有实现……
+          您可以将问题发送至1006925066@qq.com或者发送到该项目的issue区
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">函数说明</div>
+        <div class="layui-card-body">
+          <table class="layui-table" lay-size="sm" lay-even="">
+            <colgroup>
+              <col width="100">
+              <col width="100">
+              <col width="200">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>函数名</th>
+                <th>用法</th>
+                <th>说明</th>
+              </tr> 
+            </thead>
+            <tbody>
+              <tr><td colspan="3" style="text-align: center;"><b>【三角函数】</b></td></tr>
+              <tr>
+                <td><span id="katex-help-1"></span></td>
+                <td>sin(x),cos(x),tan(x)<br />cot(x),sec(x),csc(x)</td>
+                <td>三角函数，返回正弦值、余弦值、正切值……</td>
+              </tr>
+              <tr><td colspan="3" style="text-align: center;"><b>【三角函数】</b></td></tr>
+              <tr>
+                <td><span id="katex-help-1"></span></td>
+                <td>sin(x),cos(x),tan(x)<br />cot(x),sec(x),csc(x)</td>
+                <td>三角函数，返回正弦值、余弦值、正切值……</td>
+              </tr>
+              <tr>
+                <td><span id="katex-help-2"></span></td>
+                <td>asin(x),acos(x),atan(x)<br />acot(x),asec(x),acsc(x)</td>
+                <td>反三角函数，返回反正弦、反余弦、反正切……</td>
+              </tr>
+              <tr>
+                <td><span id="katex-help-3"></span></td>
+                <td>sinh(x),cosh(x),tanh(x)<br />coth(x),sech(x),csch(x)</td>
+                <td>双曲函数，返回双曲正弦、双曲余弦、双曲正切……</td>
+              </tr>
+              <tr>
+                <td><span id="katex-help-4"></span></td>
+                <td>asinh(x),acosh(x),atanh(x)<br />acoth(x),asech(x),acsch(x)</td>
+                <td>反双曲函数，返回反双曲正弦、反双曲余弦和反双曲正切……</td>
+              </tr>
+              <tr>
+                <td><span id="katex-help-5"></span><br /><span id="katex-help-6"></span></td>
+                <td>diff(f(x))<br />diff(f(x,y),[x,y])</td>
+                <td>对指定表达式求导，例如diff(x^2+3x)=2x+3，f(x)为关于x的函数，f(x,y)为关于x,y的函数，可以求偏导或高阶导数</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td><span id="katex-help-7"></span></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">建议[正在开发中…………]</div>
+        <div class="layui-card-body">
+          <form class="layui-form" action="" lay-filter="example">
+            <div class="layui-form-item">
+              <label class="layui-form-label">你的名字</label>
+              <div class="layui-input-block">
+                <input name="username" class="layui-input" type="text" placeholder="请输入你的名字" autocomplete="off" lay-verify="title">
+              </div>
+            </div>
+            <!-- <div class="layui-form-item">
+              <label class="layui-form-label">密码框</label>
+              <div class="layui-input-block">
+                <input name="password" class="layui-input" type="password" placeholder="请输入密码" autocomplete="off">
+              </div>
+            </div> -->
+            <div class="layui-form-item">
+              <label class="layui-form-label">评价一下</label>
+              <div class="layui-input-block">
+                <select name="interest" lay-filter="aihao">
+                  <option value=""></option>
+                  <option value="0">弱爆了</option>
+                  <option value="1">一般</option>
+                  <option value="2">还可以</option>
+                  <option value="3">牛x</option>
+                  <option value="4">近乎完美</option>
+                </select>
+              </div>
+            </div>
+            <!-- <div class="layui-form-item">
+              <label class="layui-form-label">复选框</label>
+              <div class="layui-input-block">
+                <input name="like[write]" title="写作" type="checkbox">
+                <input name="like[read]" title="阅读" type="checkbox">
+                <input name="like[daze]" title="发呆" type="checkbox">
+              </div>
+            </div> -->
+            <div class="layui-form-item">
+              <label class="layui-form-label">是否公开</label>
+              <div class="layui-input-block">
+                <input name="close" type="checkbox" lay-skin="switch" lay-text="ON|OFF">
+              </div>
+            </div>
+            <!-- <div class="layui-form-item">
+              <label class="layui-form-label">单选框</label>
+              <div class="layui-input-block">
+                <input name="sex" title="男" type="radio" checked="" value="男">
+                <input name="sex" title="女" type="radio" value="女">
+              </div>
+            </div> -->
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label">建议或意见</label>
+              <div class="layui-input-block">
+                <textarea name="desc" class="layui-textarea" placeholder="请输入内容"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <button class="layui-btn" lay-filter="demo1" lay-submit="">提交</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="layui/layui.js" charset="utf-8"></script>
+<script src="js/jquery.min.js"></script>
+<script src="katex/katex.js"></script>
+<script>
+// 页面初始化
+layui.use('element', function(){
+  var element = layui.element;
+  element.on('nav(demo)', function(elem){
+    //console.log(elem)
+    layer.msg(elem.text());
+  });
+});
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+  //日期
+  laydate.render({
+    elem: '#date'
+  });
+  laydate.render({
+    elem: '#date1'
+  });
+  //创建一个编辑器
+  var editIndex = layedit.build('LAY_demo_editor');
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+    ,pass: [
+      /^[\S]{6,12}$/
+      ,'密码必须6到12位，且不能出现空格'
+    ]
+    ,content: function(value){
+      layedit.sync(editIndex);
+    }
+  });
+  //监听指定开关
+  form.on('switch(switchTest)', function(data){
+    layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+      offset: '6px'
+    });
+    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+  });
+  //监听提交
+  form.on('submit(demo1)', function(data){
+    layer.alert(JSON.stringify(data.field), {
+      title: '最终的提交信息'
+    })
+    return false;
+  });
+  //表单初始赋值
+  form.val('example', {
+    "username": "数学小王子" // "name": "value"
+    //,"password": "123456"
+    ,"interest": 2
+    //,"like[write]": true //复选框选中状态
+    ,"close": true //开关状态
+    //,"sex": "女"
+    ,"desc": "我认为网站的…应该…"
+  });
+});
+function reloadLatex() {
+  // 重载所以Katex对象
+  $latex = $(".latex-box");
+  for (i = 0; i < $latex.length; i++) {
+    katex.render($latex.eq(i).attr("data-latex"), $latex[i], { displayMode:true, throwOnError: false });
+  }
+}
+// jQuery初始化
+$(document).ready(function(){
+  $("#setting-btn").click(function(){
+    $(".layui-tab.layui-tab-brief").slideToggle('slow');
+  });
+  // 公式初始化
+  katex.render("\\sin{\\left(x \\right)}", document.getElementById("katex-help-1"), {throwOnError: false});
+  katex.render("\\operatorname{asin}{\\left(x \\right)}", document.getElementById("katex-help-2"), {throwOnError: false});
+  katex.render("\\sinh{\\left(x \\right)}", document.getElementById("katex-help-3"), {throwOnError: false});
+  katex.render("\\operatorname{asinh}{\\left(x \\right)}", document.getElementById("katex-help-4"), {throwOnError: false});
+  katex.render("\\frac{d}{d x} f{\\left(x \\right)}", document.getElementById("katex-help-5"), {throwOnError: false});
+  katex.render("\\frac{\\partial^{y}}{\\partial x^{y}} f{\\left(x,y \\right)}", document.getElementById("katex-help-6"), {throwOnError: false});
+
+
+
+});
+</script>
+</body>
+</html>

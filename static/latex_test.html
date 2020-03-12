@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>帮助 Calculator</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="katex/katex.css">
+</head>
+
+<body>
+  <div>😂😀😃😜👆👉👍👏👎🤙✌💬💭✔➕➖✖➗</div>
+  <input id="input0"><button id="button0">OK</button>
+  <div id="out0"></div>
+  <script src="js/jquery.min.js"></script>
+  <script src="katex/katex.js"></script>
+  <script>
+    // jQuery初始化
+    $(document).ready(function () {
+      $("#button0").click(function () {
+        katex.render($("#input0").val(), document.getElementById("out0"), { displayMode:true, throwOnError: false });
+      });
+      $("#input0").keydown(function () {
+        KeyCode = (navigator.appname == "Netscape") ? event.which : event.keyCode;
+        if (KeyCode == 13 && !(event.ctrlKey)) {
+          $("#button0").click();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

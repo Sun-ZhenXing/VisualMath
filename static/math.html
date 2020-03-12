@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Calculator</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="css/pure-min.css">
+  <link rel="stylesheet" href="layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="katex/katex.css">
+  <style>
+    hr {
+      height: 3px;
+    }
+
+    .layui-card-body {
+      font-size: large;
+    }
+
+    .layui-card-body p {
+      text-align: center;
+    }
+
+    blockquote h1 {
+      font-size: x-large;
+    }
+
+    input {
+      width: 80%;
+    }
+
+    hr {
+      height: 3px;
+    }
+
+    .answer {
+      width: 98%;
+      min-height: 80px;
+      overflow: scroll;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <ul class="layui-nav">
+    <li class="layui-nav-item layui-this"><a href="/">首页</a></li>
+    <li class="layui-nav-item"><a href="#">介绍</a></li>
+    <li class="layui-nav-item"><a id="setting-btn">设置</a></li>
+    <li class="layui-nav-item"><a target="_blank" href="help.html">帮助</a></li>
+    <li class="layui-nav-item"><a target="_blank" href="https://github.com/sun-zhenxing/">作者</a></li>
+  </ul> -->
+  <div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header">计算</div>
+          <div class="layui-card-body">
+            <div class="layui-form-item">
+              <label class="layui-form-label">开始</label>
+              <div class="layui-input-block">
+                <input name="title" class="layui-input" type="text" placeholder="3x+5" autocomplete="off"
+                  lay-verify="title" id="math-input">
+              </div>
+              <div class="layui-input-block" style="text-align: center;padding:5px;">
+                <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" id="math-cc-1">计算</button>
+                <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" id="math-cc-2">帮助</button>
+              </div>
+            </div>
+            <hr class="layui-bg-blue">
+            <div></div>
+          </div>
+        </div>
+        <div class="layui-card">
+          <div class="layui-card-header">结果框 <button class="layui-btn layui-btn-sm layui-btn-normal" type="button" id="copy-btn">复制为Word公式</button><button class="layui-btn layui-btn-sm layui-btn-normal" type="button" id="copy-btn-latex">复制为latex公式</button></div>
+          <div class="layui-card-body" style="text-align: center;" id="math-ans-box">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="layui/layui.js" charset="utf-8"></script>
+  <script src="katex/katex.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/clipboard.min.js"></script>
+  <script>
+    // 初始化layui对象
+    layui.use('layer', 'element', function () {
+      var element = layui.element, layer = layui.layer;
+      element.on('nav(demo)', function (elem) {
+        layer.msg(elem.text());
+      });
+    });
+    function reloadLatex() {
+      // 重载所以Katex对象
+      $latex = $(".latex-box");
+      for (i = 0; i < $latex.length; i++) {
+        katex.render($latex.eq(i).attr("data-latex"), $latex[i], { displayMode:true, throwOnError: false });
+      }
+    }
+    //转义函数
+    function htmlEncode(value) { return $('<div/>').text(value).html(); }
+    function autoselect(e, s, t) { // https://www.cnblogs.com/mankii/p/9957058.html 选中文本内容
+      /**
+      * 自动选择文本框/文本域中的内容
+      * @param  {dom} e [必填，必须是input或者textarea]
+      * @param  {开始索引值} s [默认:0]
+      * @param  {[type]} t [默认：总长度]
+      * @return {[type]}   [null]
+      */
+      var startIndex = s ? Number(s) : 0;
+      var stopIndex = t ? Number(t) : $(e).val().length;
+      if (e.setSelectionRange) {
+        e.setSelectionRange(startIndex, stopIndex);
+      } else if (e.createTextRange) {
+        var range = e.createTextRange();
+        range.collapse(true);
+        range.moveStart('character', startIndex);
+        range.moveEnd('character', stopIndex - startIndex);
+        range.select();
+      }
+      e.focus();
+    }
+    /*
+    function addText(text, line) { // 添加内容
+      // if ($("#math-input").val) { // 自动添加符号
+      //   text = text + "*"
+      // }
+      $("#math-input").val($("#math-input").val() + text).focus();
+      autoselect(document.getElementById("math-input"),$("#math-input").val.length-2);
+    }*/
+    $(document).ready(function () {
+      // 加载剪切板
+      new ClipboardJS('#copy-btn');
+      new ClipboardJS('#copy-btn-latex');
+      $("#copy-btn").click(function(){
+        layer.msg("已将MathML复制到剪切板！");
+      });
+      $("#copy-btn-latex").click(function(){
+        layer.msg("已将LaTeX复制到剪切板");
+      });
+      $("#math-input").keydown(function () {
+        // 启用Firefox兼容
+        KeyCode = (navigator.appname == "Netscape") ? event.which : event.keyCode;
+        // KeyCode对照表 https://www.cnblogs.com/cxxjohnson/p/5156320.html 
+        if (KeyCode == 13 && !(event.ctrlKey)) {
+          // Enter 发送
+          $("#math-cc-1").click();
+        }
+      });
+      $("#math-cc-1").click(function () {
+        // 直接计算
+        jsonData = { content: document.getElementById('math-input').value, setting: '{ "method": "default" }' }
+        layer.msg("正在计算中~")
+        $.get('compute', jsonData, function (data) {
+          data = eval("(" + data + ")");
+          if (data["status"] == 0) {
+            $("#math-ans-box").html(['<div class="latex-box answer" data-latex="', data["latex"], '" ></div>'].join(""));
+            $("#copy-btn").attr({"data-clipboard-text":data['MathML']});
+            $latex$ = "$" + data['latex'] + "$";
+            $("#copy-btn-latex").attr({"data-clipboard-text":$latex$});
+            reloadLatex();
+          } else {
+            layer.msg("错误！检查您输入的表达式！");
+            $("#math-ans-box").html(htmlEncode(data["errorMsg"]));
+          }
+        });
+      });
+      // 对所有katex对象重载
+      reloadLatex();
+      $("#math-cc-2").click(function(){
+        layer.open({
+          type: 1, area: ['80%', '80%'], title: '帮助', shade: 0.8, anim: 0,
+          content: '<div style="padding:10px;"></div>'
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
