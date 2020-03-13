@@ -133,13 +133,33 @@
     }*/
     $(document).ready(function () {
       // 加载剪切板
-      new ClipboardJS('#copy-btn');
-      new ClipboardJS('#copy-btn-latex');
-      $("#copy-btn").click(function(){
+      var clip1 = new ClipboardJS('#copy-btn',{
+        text: function(trigger) {
+          return trigger.getAttribute('data-clipboard-text');
+        }
+      });
+      var clip2 = new ClipboardJS('#copy-btn-latex',{
+        text: function(trigger) {
+          return trigger.getAttribute('data-clipboard-text');
+        }
+      });
+      // $("#copy-btn").click(function(){
+      //   layer.msg("已将MathML复制到剪切板！");
+      // });
+      // $("#copy-btn-latex").click(function(){
+      //   layer.msg("已将LaTeX复制到剪切板");
+      // });
+      clip1.on('success', function (e) {
         layer.msg("已将MathML复制到剪切板！");
       });
-      $("#copy-btn-latex").click(function(){
-        layer.msg("已将LaTeX复制到剪切板");
+      clip1.on('error', function (e) {
+        layer.msg("复制失败");
+      });
+      clip2.on('success', function (e) {
+        layer.msg("已将Latex复制到剪切板！");
+      });
+      clip2.on('error', function (e) {
+        layer.msg("复制失败");
       });
       $("#math-input").keydown(function () {
         // 启用Firefox兼容
@@ -153,7 +173,7 @@
       $("#math-cc-1").click(function () {
         // 直接计算
         jsonData = { content: document.getElementById('math-input').value, setting: '{ "method": "default" }' }
-        layer.msg("正在计算中~")
+        // layer.msg("正在计算中~")
         $.get('compute', jsonData, function (data) {
           data = eval("(" + data + ")");
           if (data["status"] == 0) {
