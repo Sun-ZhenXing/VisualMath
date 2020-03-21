@@ -6,6 +6,7 @@
 from .utils import Functional_Method
 from .errorHandler import handler_main
 from traceback import print_exc
+import sys
 # from eventlet import Timeout,monkey_patch
 
 # TimeLimit = 2
@@ -23,7 +24,7 @@ def compute(content, setting="default"):
         else:
             output = Functional_Method["default"][0](content)
     except Exception as error:
-        output = handler_main(error)
+        output = handler_main(error, sys.exc_info())
         if DebugMode:
             print_exc()
     return output
