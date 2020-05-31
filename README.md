@@ -1,6 +1,8 @@
 # VisualMath
+
 Sympy-based mathematical computing services
-==================
+
+---------------
 | 中文：![中文README][README_zh]
 
 It is highly recommended to take a look at the introduction: https://sun-zhenxing.gitee.io/myblog/pages/visualmath.html
