@@ -3,7 +3,7 @@
 Sympy-based mathematical computing services
 
 ---------------
-| 中文：![中文README][README_zh]
+| 中文：![README_zh]
 
 It is highly recommended to take a look at the introduction: https://sun-zhenxing.gitee.io/myblog/pages/visualmath.html
 
@@ -18,10 +18,10 @@ layui is a simple and easy to use web framework
 flask server framework
 jQuery All web logic is written by jq
 ```
-## support
+## Support
 The methods currently supported within SymPy are basically callable, with the possibility of adding drawing, pseudo-code, machine proof, etc.
 
-## dependence
+## Dependence
 Version required: python3.x | Other latest available
 
 ```
@@ -43,7 +43,7 @@ Listen to your own IP by default
 
 Open your browser and enter http://ip:3389/
 
-## license
+## License
 This project is issued under the CC-BY-NC-SA 4.0 license (Attribution-NonCommercial Use-ShareAlike 4.0 Protocol International Public License), abbreviated as CC BY-SA 4.0.
 
 I have not placed licenses in the project repository, which does not mean you do not have to comply with these protocols. Please contact me if you need authorization outside of the agreement.
