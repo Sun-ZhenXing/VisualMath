@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VisualMath</title>
+  <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-input {
+      font-family: "Source Code Pro", "DejaVu Sans Mono", "Ubuntu Mono", "Anonymous Pro", "Droid Sans Mono", Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .hero {
+      height: 100vh;
+    }
+
+    .ans {
+      text-align: center;
+      overflow: scroll;
+      min-height: 100px;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero bg-gray">
+    <div class="hero-body">
+      <h1>VisualMath</h1>
+      <div class="form-group has-icon-right">
+        <input type="text" class="form-input" id="input-main" placeholder="Enter to compute">
+        <i class="form-icon loading hide"></i>
+      </div>
+      <div class="form-group">
+        <div class="ans"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+  <script>
+    function reRender(latex) {
+      const element = document.querySelector('.ans');
+      katex.render(latex, element, {
+        throwOnError: false,
+        displayMode: true
+      });
+    }
+    $(document).ready(function () {
+      $('#input-main').bind('keypress', function (event) {
+        const text = $('#input-main').val()
+        if (event.keyCode === 13 && text) {
+          $('.loading').removeClass('hide')
+          $.ajax({
+            url: '/compute',
+            method: 'POST',
+            dataType: 'json',
+            data: JSON.stringify({
+              text: text
+            }),
+            success: function (data) {
+              $('.loading').addClass('hide')
+              console.log(data)
+              
+              reRender(data['latex'])
+            },
+            error: function (err) {
+              console.log(err)
+              $('.loading').addClass('hide')
+              if (err.responseJSON) {
+                $('.ans').text(err.responseJSON['message'])
+              } else {
+                $('.ans').text('Unknown err')
+              }
+            }
+          })
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>
