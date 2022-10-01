@@ -1,6 +1,8 @@
 from random import random as rnd
 
 from sympy.abc import *
+from sympy.plotting import *
+from sympy.liealgebras import *
 from sympy import *
 
 f, g, h = Function('f'), Function('g'), Function('h')
@@ -11,5 +13,6 @@ C = symbols('C')
 assert rnd, _ClassRegistry
 
 
-def eval_expr(s: str):
-    return eval(s)
+def eval_expr(__s: str):
+    assert len(__s) < 300
+    return eval(__s)

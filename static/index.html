@@ -63,6 +63,7 @@
         const text = $('#input-main').val()
         if (event.keyCode === 13 && text) {
           $('.loading').removeClass('hide')
+          $('.ans').text('')
           $.ajax({
             url: '/compute',
             method: 'POST',

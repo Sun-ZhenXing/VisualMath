@@ -31,6 +31,8 @@ python sanic_server.py
 
 Open: <http://127.0.0.1:3389/>
 
+![](images/2022-10-01-09-25-54.png)
+
 ## License | 许可证
 
 MIT.

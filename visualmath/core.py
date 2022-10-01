@@ -10,7 +10,7 @@ def format_input(s: str) -> str:
     s = re.sub(r'([0-9]+) {0,}\/ {0,}([0-9]+)', r'\1*x/x/\2', s)
     s = re.sub(r'\^', '**', s)
     s = re.sub(r'([0-9])\(', r'\1*(', s)
-    s = re.sub(r'([0-9])([a-zA-Z])', r'\1*\2', s)
+    s = re.sub(r'([^a-zA-Z][0-9]+)([a-zA-Z])', r'\1*\2', s)
     s = re.sub(r'\)\(', ')*(', s)
     return s
 
