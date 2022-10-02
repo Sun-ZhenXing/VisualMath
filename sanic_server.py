@@ -7,7 +7,7 @@ except ImportError:
 from sanic import Request, Sanic, json
 from sanic.response import redirect
 
-from visualmath import compute
+from visualmath import router
 
 app = Sanic('app')
 app.static('', './static')
@@ -20,7 +20,7 @@ async def index_(request: Request):
 
 @app.route('/compute', methods=['POST'])
 async def compute_(request: Request):
-    return json(compute(request.json['text']))
+    return json(router(request.json['text']))
 
 
 if __name__ == '__main__':

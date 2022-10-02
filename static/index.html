@@ -8,6 +8,7 @@
   <title>VisualMath</title>
   <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
   <style>
     * {
       margin: 0;
@@ -32,13 +33,42 @@
       display: none;
     }
 
-    .graph {
+    .basic {
+      display: block;
+      position: relative;
+    }
+
+    .copy-group {
       display: flex;
       flex-direction: row;
-      justify-content: center;
       align-items: center;
+      position: absolute;
+      top: -.2rem;
+      right: 0;
+      opacity: 3%;
+      transition: all .5s ease 0s;
+    }
+
+    .copy-group:hover {
+      transition: all .3s ease 0s;
+      opacity: 85%;
+    }
+
+    .copy-group button {
+      margin: 0 3px;
+    }
+
+    .graph {
+      text-align: center;
       max-width: 100%;
       overflow: auto;
+    }
+
+    .graph img {
+      display: flex;
+      margin: 0 auto;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
@@ -52,7 +82,17 @@
         <i class="form-icon loading hide"></i>
       </div>
       <div class="form-group">
-        <div class="ans"></div>
+        <div class="basic">
+          <div class="ans"></div>
+          <div class="copy-group">
+            <button id="copy-btn-latex" class="btn btn-success btn-sm" onclick="copy('latex')"><i
+                class="icon icon-copy"></i> LaTeX</button>
+            <button id="copy-btn-mathml" class="btn btn-success btn-sm" onclick="copy('mathml')"><i
+                class="icon icon-copy"></i> MathML</button>
+            <button id="copy-btn-omml" class="btn btn-success btn-sm" onclick="copy('omml')"><i
+                class="icon icon-copy"></i> OMML</button>
+          </div>
+        </div>
         <div class="graph"></div>
       </div>
     </div>
@@ -67,6 +107,18 @@
         throwOnError: false,
         displayMode: true
       });
+    }
+    function copy(id) {
+      console.log('copy:', id)
+      const text = $('.ans').attr('data-' + id)
+      if (typeof text === 'undefined') {
+        return
+      }
+      navigator.clipboard.writeText(text)
+      $(`#copy-btn-${id} i`).removeClass('icon-copy').addClass('icon-check')
+      setTimeout(function () {
+        $(`#copy-btn-${id} i`).removeClass('icon-check').addClass('icon-copy')
+      }, 500)
     }
     $(document).ready(function () {
       $('#input-main').bind('keypress', function (event) {
@@ -91,10 +143,25 @@
                 $('.ans').text(data['msg'])
                 return
               }
-              if (data['graph']) {
-                $('.graph').html(`<img src="${data['graph']}" alt="graph" />`)
+              for (let i = 0; i < data.data.length; i++) {
+                const component = data.data[i]
+                const type = component['component']
+                switch (type) {
+                  case 'Basic':
+                    reRender(component['latex'])
+                    $('.ans').attr('data-expr', component['expr'])
+                    $('.ans').attr('data-omml', component['omml'])
+                    $('.ans').attr('data-latex', component['latex'])
+                    $('.ans').attr('data-mathml', component['mathml'])
+                    break;
+                  case 'Graph':
+                    $('.graph').html(component['graph'])
+                    break;
+                  default:
+                    console.log('Unkown component:', component)
+                    break;
+                }
               }
-              reRender(data['latex'])
             },
             error: function (err) {
               console.log(err)

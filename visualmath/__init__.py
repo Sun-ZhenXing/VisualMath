@@ -1,3 +1,3 @@
-__all__ = ['compute']
+__all__ = ['router']
 
-from .core import compute
+from .core import router

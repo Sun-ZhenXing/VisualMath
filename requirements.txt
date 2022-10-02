@@ -1,3 +1,4 @@
 sympy
 sanic
 latex2mathml
+lxml
