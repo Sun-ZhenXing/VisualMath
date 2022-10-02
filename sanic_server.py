@@ -1,5 +1,8 @@
-import matplotlib
-matplotlib.use('agg')
+try:
+    import matplotlib
+    matplotlib.use('agg')
+except ImportError:
+    pass
 
 from sanic import Request, Sanic, json
 from sanic.response import redirect

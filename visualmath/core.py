@@ -21,7 +21,15 @@ def format_input(s: str) -> str:
 
 
 def compute(content: str) -> dict[str]:
-    ans = eval_expr(format_input(content))
+    try:
+        ans = eval_expr(format_input(content))
+    except Exception as e:
+        errmsg = e.args[0]
+        return {
+            'code': -1,
+            'ans': None,
+            'msg': 'Error: ' + errmsg,
+        }
     graph = None
     if isinstance(ans, Plot):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -34,6 +42,8 @@ def compute(content: str) -> dict[str]:
     latex = to_latex(ans)
     mathml = to_mathml(latex)
     return {
+        'code': 0,
+        'msg': 'ok',
         'ans': str(ans),
         'latex': latex,
         'mathml': mathml,

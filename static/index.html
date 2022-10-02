@@ -24,7 +24,7 @@
 
     .ans {
       text-align: center;
-      overflow: scroll;
+      overflow: auto;
       min-height: 100px;
     }
 
@@ -37,6 +37,8 @@
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      max-width: 100%;
+      overflow: auto;
     }
   </style>
 </head>
@@ -85,6 +87,10 @@
             }),
             success: function (data) {
               $('.loading').addClass('hide')
+              if (data['code'] !== 0) {
+                $('.ans').text(data['msg'])
+                return
+              }
               if (data['graph']) {
                 $('.graph').html(`<img src="${data['graph']}" alt="graph" />`)
               }
