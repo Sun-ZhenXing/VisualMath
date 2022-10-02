@@ -1,7 +1,12 @@
+import base64
+import os
 import re
+import tempfile
+import uuid
 
 from latex2mathml.converter import convert as to_mathml
 from sympy import latex as to_latex
+from sympy.plotting.plot import Plot
 
 from ._eval import eval_expr
 
@@ -17,10 +22,20 @@ def format_input(s: str) -> str:
 
 def compute(content: str) -> dict[str]:
     ans = eval_expr(format_input(content))
+    graph = None
+    if isinstance(ans, Plot):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            filename = '{}.svg'.format(uuid.uuid4())
+            temp_graph = os.path.join(temp_dir, filename)
+            ans.save(temp_graph)
+            with open(temp_graph, 'rb') as f:
+                base64_str = base64.b64encode(f.read()).decode('utf-8')
+                graph = 'data:image/svg+xml;base64,' + base64_str
     latex = to_latex(ans)
     mathml = to_mathml(latex)
     return {
         'ans': str(ans),
         'latex': latex,
-        'mathml': mathml
+        'mathml': mathml,
+        'graph': graph
     }

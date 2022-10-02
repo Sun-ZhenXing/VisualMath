@@ -1,8 +1,8 @@
 # VisualMath
 
-![](images/2022-09-30-19-39-18.png)
+![](images/2022-10-02-10-16-15.png)
 
-![](images/2022-09-30-19-23-18.png)
+![](images/2022-09-30-19-39-18.png)
 
 ![](images/2022-09-30-19-24-55.png)
 
@@ -29,9 +29,16 @@ pip install -r requirements.txt
 python sanic_server.py
 ```
 
-Open: <http://127.0.0.1:3389/>
+If you need to support drawing, you can install `matplotlib`. If you need a real-time GUI, you can comment the following code.
 
-![](images/2022-10-01-09-25-54.png)
+如果需要支持绘图，可以安装 `matplotlib`，如果需要实时 GUI，可以注释下面这一句：
+
+```python
+# sanic_server.py line 2
+matplotlib.use('agg')
+```
+
+Open: <http://127.0.0.1:3389/>
 
 ## License | 许可证
 

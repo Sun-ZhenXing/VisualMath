@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('agg')
+
 from sanic import Request, Sanic, json
 from sanic.response import redirect
 
