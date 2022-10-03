@@ -15,6 +15,10 @@
       padding: 0;
     }
 
+    .hide {
+      display: none;
+    }
+
     .form-input {
       font-family: "Source Code Pro", "DejaVu Sans Mono", "Ubuntu Mono", "Anonymous Pro", "Droid Sans Mono", Menlo, Monaco, Consolas, Inconsolata, Courier, monospace, "PingFang SC", "Microsoft YaHei", sans-serif;
     }
@@ -23,39 +27,38 @@
       min-height: 100vh;
     }
 
-    .ans {
-      text-align: center;
-      overflow: auto;
-      min-height: 100px;
-    }
-
-    .hide {
-      display: none;
-    }
-
     .basic {
       display: block;
       position: relative;
     }
 
-    .copy-group {
+    .basic .ans {
+      text-align: center;
+      overflow: auto;
+      min-height: 100px;
+      padding-top: .8rem;
+    }
+
+    .basic .copy-group {
       display: flex;
       flex-direction: row;
       align-items: center;
       position: absolute;
+      overflow-x: auto;
+      max-width: 100%;
       top: -.2rem;
       right: 0;
-      opacity: 3%;
-      transition: all .5s ease 0s;
     }
 
-    .copy-group:hover {
+    .basic .copy-group button:hover {
       transition: all .3s ease 0s;
       opacity: 85%;
     }
 
-    .copy-group button {
-      margin: 0 3px;
+    .basic .copy-group button {
+      opacity: 50%;
+      transition: all .5s ease 0s;
+      margin-left: 3px;
     }
 
     .graph {
@@ -85,12 +88,14 @@
         <div class="basic">
           <div class="ans"></div>
           <div class="copy-group">
-            <button id="copy-btn-latex" class="btn btn-success btn-sm" onclick="copy('latex')"><i
+            <button id="copy-btn-latex" class="btn btn-success btn-sm text-tiny" onclick="copy('latex')"><i
                 class="icon icon-copy"></i> LaTeX</button>
-            <button id="copy-btn-mathml" class="btn btn-success btn-sm" onclick="copy('mathml')"><i
+            <button id="copy-btn-mathml" class="btn btn-success btn-sm text-tiny" onclick="copy('mathml')"><i
                 class="icon icon-copy"></i> MathML</button>
-            <button id="copy-btn-omml" class="btn btn-success btn-sm" onclick="copy('omml')"><i
+            <button id="copy-btn-omml" class="btn btn-success btn-sm text-tiny" onclick="copy('omml')"><i
                 class="icon icon-copy"></i> OMML</button>
+            <button id="copy-btn-expr" class="btn btn-success btn-sm text-tiny" onclick="copy('expr')"><i
+                class="icon icon-copy"></i> Expr</button>
           </div>
         </div>
         <div class="graph"></div>
@@ -114,11 +119,22 @@
       if (typeof text === 'undefined') {
         return
       }
-      navigator.clipboard.writeText(text)
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text)
+      } else {
+        const inputElement = document.createElement('input');
+        inputElement.value = text;
+        const dom = document.querySelector('.ans');
+        dom.appendChild(inputElement);
+        inputElement.select();
+        const flag = document.execCommand('copy');
+        inputElement.style.display = 'none';
+        inputElement.remove();
+      }
       $(`#copy-btn-${id} i`).removeClass('icon-copy').addClass('icon-check')
       setTimeout(function () {
         $(`#copy-btn-${id} i`).removeClass('icon-check').addClass('icon-copy')
-      }, 500)
+      }, 1000)
     }
     $(document).ready(function () {
       $('#input-main').bind('keypress', function (event) {
@@ -151,7 +167,7 @@
                     reRender(component['latex'])
                     $('.ans').attr('data-expr', component['expr'])
                     $('.ans').attr('data-omml', component['omml'])
-                    $('.ans').attr('data-latex', component['latex'])
+                    $('.ans').attr('data-latex', `$${component['latex']}$`)
                     $('.ans').attr('data-mathml', component['mathml'])
                     break;
                   case 'Graph':

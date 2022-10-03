@@ -83,6 +83,7 @@ def router(expr: str, context: dict[str] = None) -> dict[str]:
     try:
         ans = eval_expr(format_input(expr))
     except Exception as e:
+        print(e.args)
         errmsg = 'Error: ' + e.args[0]
         res['code'] = -1
         res['msg'] = errmsg
