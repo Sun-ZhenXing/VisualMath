@@ -1,6 +1,7 @@
 try:
     import matplotlib
-    matplotlib.use('agg')
+
+    matplotlib.use("agg")
 except ImportError:
     pass
 
@@ -9,19 +10,19 @@ from sanic.response import redirect
 
 from visualmath import router
 
-app = Sanic('app')
-app.static('', './static')
+app = Sanic("app")
+app.static("", "./static")
 
 
-@app.route('/', methods=['GET'])
+@app.route("/", methods=["GET"])
 async def index_(request: Request):
-    return redirect('/index.html')
+    return redirect("/index.html")
 
 
-@app.route('/compute', methods=['POST'])
+@app.route("/compute", methods=["POST"])
 async def compute_(request: Request):
-    return json(router(request.json['text']))
+    return json(router(request.json["text"]))
 
 
-if __name__ == '__main__':
-    app.run('127.0.0.1', 3389, fast=True)
+if __name__ == "__main__":
+    app.run("127.0.0.1", 3389, fast=True)

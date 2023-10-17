@@ -1,3 +1,3 @@
-__all__ = ['router']
+__all__ = ["router"]
 
-from .core import router
+from visualmath.core import router

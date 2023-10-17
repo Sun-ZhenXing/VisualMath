@@ -38,6 +38,6 @@ If you need to support drawing, you can install `matplotlib`. If you need a real
 matplotlib.use('agg')
 ```
 
-## License | 许可证
+## License
 
 MIT.
